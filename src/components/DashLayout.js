@@ -125,7 +125,7 @@ const DashLayout = () => {
                     </Sider>
 
                     {/* Content Area */}
-                    <Layout style={{ padding: '0 24px 24px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: 'url("/background.jpeg")' }}>
+                    <Layout style={{ padding: '0 24px 24px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: 'url("/background2.png")' }}>
                         <Content
                             style={{
                                 padding: 24,

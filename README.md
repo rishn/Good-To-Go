@@ -5,7 +5,7 @@
 Atlan Goods Application is an on-demand logistics platform that allows for efficient management of bookings, drivers, and vehicles. It serves customers, drivers, and admins with tailored functionalities for each user base. The frontend provides a responsive and intuitive user interface to manage logistics operations effectively.
 
 <p align="center">
-  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/public/background2.png" alt="Finding Driver" />
+  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/public/background2.png" alt="Image" />
 </p>
 
 ### Deployed Link

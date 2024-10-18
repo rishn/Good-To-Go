@@ -49,7 +49,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Ensure full page height */
-  background-image: url('./img/background.jpeg'); /* Add your background image here */
+  background-image: url('./img/background2.jpeg'); /* Add your background image here */
   background-size: cover;
   background-position: center;
 }
