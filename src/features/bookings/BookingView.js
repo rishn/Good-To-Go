@@ -228,15 +228,15 @@ const BookingView = ({ booking }) => {
           <Typography.Paragraph style={{ color: '#fff' }}>
             {isDriver ? `Customer: ${booking.userId.username}` : `Driver: ${booking.driverName} ${booking.vehiclePlate} ${booking.driverId.rating}★`}
           </Typography.Paragraph>
+          
+          {!isDriver && <Button onClick={handleCancelBooking} type="primary" danger>
+              Cancel Booking
+          </Button>}
 
           {isDriver && (<>
             <div style={{ marginTop: 16 }}>
               {booking.status === 'pending' && !accepted && <Button onClick={handleAcceptBooking} type="primary" style={{ marginRight: 8 }}>
                 Accept Booking
-              </Button>}
-              
-              {!isDriver && <Button onClick={handleCancelBooking} type="primary" danger>
-                Cancel Booking
               </Button>}
             </div>
           
