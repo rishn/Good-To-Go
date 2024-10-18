@@ -35,10 +35,10 @@ function App() {
 
   const { id, isDriver, isAdmin } = useAuth(); // Use useAuth to get logged-in user details
 
-  const { data: usersResult, isSuccess: isUsersSuccess } = useGetUsersQuery(undefined);
-  const { data: driversResult, isSuccess: isDriversSuccess } = useGetDriversQuery(undefined);
-  const { data: vehiclesResult, isSuccess: isVehiclesSuccess } = useGetVehiclesQuery(undefined);
-  const { data: bookingsResult, isSuccess: isBookingsSuccess } = useGetBookingsQuery(undefined); // Fetch bookings
+  const { data: usersResult, isSuccess: isUsersSuccess, isLoading: isUsersLoading } = useGetUsersQuery(undefined);
+  const { data: driversResult, isSuccess: isDriversSuccess, isLoading: isDriversLoading } = useGetDriversQuery(undefined);
+  const { data: vehiclesResult, isSuccess: isVehiclesSuccess, isLoading: isVehiclesLoading } = useGetVehiclesQuery(undefined);
+  const { data: bookingsResult, isSuccess: isBookingsSuccess, isLoading: isBookingsLoading } = useGetBookingsQuery(undefined); // Fetch bookings
 
   const drivers = isUsersSuccess && isDriversSuccess && driversResult?.ids
     ? driversResult.ids
@@ -72,6 +72,9 @@ function App() {
         .map((id) => bookingsResult.entities[id])
         .filter((booking) => booking.driverId._id || booking.driverId.id === id) // Filter bookings by logged-in customer
     : [];
+
+  if (isBookingsLoading || isDriversLoading || isUsersLoading || isVehiclesLoading)
+    return <Spin tip="Loading content..." />;
 
   return (
     <Routes>
