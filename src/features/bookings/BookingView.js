@@ -153,7 +153,6 @@ const BookingView = ({ booking }) => {
         if (response.results && response.results.length > 0) {
             const { lat, lng } = response.results[0].geometry;
             setDriverLocation({ lat, lng });
-            console.log({id: booking.driverId.id || booking.driverId._id, driverNum: booking.driverId.driverNum, currentLocation: { lat, lng }})
             await updateDriver({ id: booking.driverId.id || booking.driverId._id, driverNum: booking.driverId.driverNum, currentLocation: { lat, lng } });
           } else {
             message.error('Location not found. Please try again.');
@@ -229,7 +228,7 @@ const BookingView = ({ booking }) => {
             {isDriver ? `Customer: ${booking.userId.username}` : `Driver: ${booking.driverName} ${booking.vehiclePlate} ${booking.driverId.rating}★`}
           </Typography.Paragraph>
           
-          {!isDriver && <Button onClick={handleCancelBooking} type="primary" danger>
+          {!isDriver && booking.status === 'pending' && <Button onClick={handleCancelBooking} type="primary" danger>
               Cancel Booking
           </Button>}
 

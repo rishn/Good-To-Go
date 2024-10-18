@@ -101,7 +101,6 @@ const NewBookingForm = ({ drivers }) => {
 
     useEffect(() => {
         const currentBooking = newBookings.find(booking => booking.accepted === true);
-        console.log(currentBooking);
         if (currentBooking && currentBooking.accepted && currentBooking.driverId) {
             // Trigger Modal
             showConfirmationModal(currentBooking);
@@ -204,7 +203,6 @@ const NewBookingForm = ({ drivers }) => {
     }, [pickupLocation, dropoffLocation]);
 
     async function handleSubmitBooking(newBookings, booking) {
-        console.log('Cancelling booking with IDs'); // Check the booking ID
         if (!newBookings || !booking) {
             console.error('Bookings are required but not provided!');
             return; // Early return if no bookingId
@@ -218,7 +216,6 @@ const NewBookingForm = ({ drivers }) => {
     };
 
     async function handleCancelBooking(newBookings) {
-        console.log('Cancelling booking with IDs'); // Check the booking ID
         if (!newBookings) {
             console.error('Bookings are required but not provided!');
             return; // Early return if no bookingId
@@ -321,8 +318,6 @@ const NewBookingForm = ({ drivers }) => {
                 const distToDriver = calculateDistance(pickupLocation, driverLocation);
                 return distToDriver <= 15; // Consider drivers within 15 km
             });
-
-            console.log(nearbyDrivers);
     
             // Display nearest drivers on the map
             nearbyDrivers.forEach(driver => {
@@ -330,6 +325,9 @@ const NewBookingForm = ({ drivers }) => {
                     .bindPopup(`${driver.userId.username} - ${driver.vehicle.licensePlate} (${driver.vehicle.type})`)
                     .addTo(showMap);
             });
+
+            if (!nearbyDrivers.length)
+                message.info("No nearby drivers near your location right now... Please try again later");
     
             // Create booking for each nearby driver
             for (const driver of nearbyDrivers) {

@@ -94,7 +94,6 @@ function App() {
       setCounter(1);
     }
   }, [driverBookings, id, count])
-  console.log(driverBookings)
 
   if (isBookingsLoading || isDriversLoading || isUsersLoading || isVehiclesLoading)
     return <Spin tip="Loading content..." />;
