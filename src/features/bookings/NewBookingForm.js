@@ -21,9 +21,6 @@ const NewBookingForm = ({ drivers }) => {
     const [deleteBooking, { isSuccess: isDelBookingSuccess, isError: isDelBookingError, error: delBookingError }] = useDeleteBookingMutation();
     const {
         data: bookingsResult,
-        isSuccess: isBookingsSuccess,
-        isError: isBookingsError,
-        error: bookingsError
       } = useGetBookingsQuery('bookingsList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
@@ -97,18 +94,12 @@ const NewBookingForm = ({ drivers }) => {
 
     useEffect(() => {
         const bookings = bookingsResult?.ids ? bookingsResult.ids.map((id) => bookingsResult.entities[id]) : [];
-        console.log(bookings);
-
-        for (const booking of bookings)
-            console.log(booking.userId.username === username, booking.pickupAddress === pickupAddress, 
-                booking.dropoffAddress === dropoffAddress, booking.status === "pending", booking.item === item);
 
         setNewBookings(bookings.filter((booking) => (booking.userId.username === username) && (booking.pickupAddress === pickupAddress) && 
-            (booking.dropoffAddress === dropoffAddress) && (booking.status === "pending" && booking.item === item)));
+            (booking.dropoffAddress === dropoffAddress) && (booking.status === "pending") && (booking.item === item)));
     }, [bookingsResult]);
 
     useEffect(() => {
-
         const currentBooking = newBookings.find(booking => booking.accepted === true);
         console.log(currentBooking);
         if (currentBooking && currentBooking.accepted && currentBooking.driverId) {

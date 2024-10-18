@@ -74,16 +74,17 @@ const BookingList = ({ bookings }) => {
                 {booking.item}
               </Typography.Title>
               <Typography.Paragraph style={{ color: '#fff' }}>
-                Lat {booking.pickupLocation.lat}, Lng {booking.pickupLocation.lng} to Lat {booking.dropoffLocation.lat}, Lng {booking.dropoffLocation.lng}
-              </Typography.Paragraph>
-              <Typography.Paragraph style={{ color: '#fff' }}>
-                Price: ${booking.price}
+                {booking.pickupAddress === 'Your Current Location' 
+                ? `Lat ${booking.pickupLocation.lat}, Lng ${booking.pickupLocation.lng}`
+                : booking.pickupAddress} to {booking.dropoffAddress === 'Your Current Location' 
+                ? `Lat ${booking.dropoffLocation.lat}, Lng ${booking.dropoffLocation.lng}`
+                : booking.dropoffAddress}
               </Typography.Paragraph>
               <Typography.Paragraph style={{ color: '#fff' }}>
                 Status: {booking.status}
               </Typography.Paragraph>
               <Typography.Paragraph style={{ color: '#fff' }}>
-                {isDriver ? `Customer: ${booking.userId.username}` : `Driver: ${booking.driverId.driverNum} ${booking.driverId.rating}★`}
+                {isDriver ? `Customer: ${booking.userId.username}` : `Driver: ${booking.driverName} ${booking.driverId.rating}★`}
               </Typography.Paragraph>
             </Card>
           ))}

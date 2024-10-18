@@ -31,7 +31,8 @@ import { useGetDriversQuery } from './features/drivers/driversApiSlice';
 import { useGetVehiclesQuery } from './features/vehicles/vehiclesApiSlice';
 import { useGetBookingsQuery } from './features/bookings/bookingsApiSlice'; 
 import useAuth from './hooks/useAuth'; // Importing useAuth for determining logged-in user roles
-import { Spin } from 'antd';
+import { Spin, message } from 'antd';
+import { counter } from '@fortawesome/fontawesome-svg-core';
 
 function App() {
   useTitle('Atlan Application');
@@ -40,7 +41,17 @@ function App() {
   const { data: usersResult, isSuccess: isUsersSuccess, isLoading: isUsersLoading } = useGetUsersQuery(undefined);
   const { data: driversResult, isSuccess: isDriversSuccess, isLoading: isDriversLoading } = useGetDriversQuery(undefined);
   const { data: vehiclesResult, isSuccess: isVehiclesSuccess, isLoading: isVehiclesLoading } = useGetVehiclesQuery(undefined);
-  const { data: bookingsResult, isSuccess: isBookingsSuccess, isLoading: isBookingsLoading } = useGetBookingsQuery(undefined); // Fetch bookings
+  const {
+    data: bookingsResult,
+    isSuccess: isBookingsSuccess,
+    isLoading: isBookingsLoading,
+  } = useGetBookingsQuery('bookingsList', {
+    pollingInterval: 15000,
+    refetchOnFocus: true,
+    refetchOnMountOrArgChange: true
+  });
+
+  const [count, setCounter] = useState(0);
 
   const drivers = isUsersSuccess && isDriversSuccess && driversResult?.ids
     ? driversResult.ids
@@ -50,6 +61,8 @@ function App() {
         return { ...driver, user };
       })
     : [];
+  
+  const driverId = drivers.find((driver) => driver.userId._id === id)?._id;
 
   const vehicles = isVehiclesSuccess && vehiclesResult?.ids
     ? vehiclesResult.ids.map((id) => vehiclesResult.entities[id])
@@ -72,8 +85,16 @@ function App() {
   const driverBookings = isBookingsSuccess && bookingsResult?.ids && isDriver
     ? bookingsResult.ids
         .map((id) => bookingsResult.entities[id])
-        .filter((booking) => booking.driverId._id || booking.driverId.id === id) // Filter bookings by logged-in customer
+        .filter((booking) => booking.driverId._id === driverId) // Filter bookings by logged-in driver
     : [];
+  
+  useEffect(() => { 
+    if (id != '' && driverBookings.filter((booking) => !booking.accepted).length && !count) {
+      message.info('New booking request! Go to bookings to know more');
+      setCounter(1);
+    }
+  }, [driverBookings, id, count])
+  console.log(driverBookings)
 
   if (isBookingsLoading || isDriversLoading || isUsersLoading || isVehiclesLoading)
     return <Spin tip="Loading content..." />;

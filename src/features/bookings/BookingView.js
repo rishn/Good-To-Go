@@ -12,7 +12,7 @@ import { geocode } from 'opencage-api-client';
 import { useNavigate } from 'react-router-dom';
 
 const BookingView = ({ booking }) => {
-  useTitle(`View ${booking._id || booking.id} Details | Atlan Application`);
+  useTitle(`${booking.userId.username}'s ${booking.item} Transport | Atlan Application`);
   const { isDriver } = useAuth();
 
   const navigate = useNavigate(); 
@@ -20,6 +20,7 @@ const BookingView = ({ booking }) => {
   // State for driver location update
   const [driverLocation, setDriverLocation] = useState({ lat: booking.driverLocation.lat, lng: booking.driverLocation.lng });
   const [locationInput, setLocationInput] = useState('');
+  const [accepted, setAccepted] = useState(booking.accepted);
 
   const [updateBooking, { isSuccess: isBookingSuccess, isError: isBookingError, error: bookingError }] = useUpdateBookingMutation();
   const [deleteBooking, { isSuccess: isDelBookingSuccess, isError: isDelBookingError, error: delBookingError }] = useDeleteBookingMutation();
@@ -123,8 +124,11 @@ const BookingView = ({ booking }) => {
 
   const handleAcceptBooking = async () => {
     try {
+      setAccepted(true);
       await updateBooking({ id: booking._id || booking.id, accepted: true, status: 'pending' });
+
       message.success('Booking accepted!');
+      navigate('/atlan/bookings');
     } catch (error) {
       message.error('Error accepting booking.');
     }
@@ -132,8 +136,8 @@ const BookingView = ({ booking }) => {
 
   const handleCancelBooking = async () => {
     try {
-      if (!isDriver)
-        await deleteBooking({ id: booking._id || booking.id });
+      setAccepted(false);
+      await deleteBooking({ id: booking._id || booking.id });
 
       message.info('Booking canceled');
       navigate('/atlan/bookings');
@@ -225,36 +229,35 @@ const BookingView = ({ booking }) => {
             {isDriver ? `Customer: ${booking.userId.username}` : `Driver: ${booking.driverName} ${booking.vehiclePlate} ${booking.driverId.rating}★`}
           </Typography.Paragraph>
 
-          {isDriver && (
-            <>
-              <div style={{ marginTop: 16 }}>
-                <Button onClick={handleAcceptBooking} type="primary" style={{ marginRight: 8 }}>
-                  Accept Booking
-                </Button>
-                <Button onClick={handleCompleteBooking} type="primary" style={{ marginTop: 8 }}>
-                  Mark as Completed
-                </Button>
-              </div>
-            
-              <div style={{ marginTop: '20px' }}>
-                <Input 
-                  placeholder="Enter location" 
-                  value={locationInput} 
-                  onChange={(e) => setLocationInput(e.target.value)} 
-                  style={{ marginBottom: '10px' }} 
-                />
-                <Button onClick={handleLocationUpdate} type="primary" style={{ marginRight: '8px' }}>
-                  Update Location
-                </Button>
-                <Button onClick={handleCurrentLocation} type="primary">
-                  Use Current Location
-                </Button>
-              </div>
-            </>
-          )}
+          {isDriver && (<>
+            <div style={{ marginTop: 16 }}>
+              {booking.status === 'pending' && !accepted && <Button onClick={handleAcceptBooking} type="primary" style={{ marginRight: 8 }}>
+                Accept Booking
+              </Button>}
+              
+              {!isDriver && <Button onClick={handleCancelBooking} type="primary" danger>
+                Cancel Booking
+              </Button>}
+            </div>
+          
+            <div style={{ marginTop: '20px' }}>
+              <Input 
+                placeholder="Enter location" 
+                value={locationInput} 
+                onChange={(e) => setLocationInput(e.target.value)} 
+                style={{ marginBottom: '10px' }} 
+              />
+              <Button onClick={handleLocationUpdate} type="primary" style={{ marginRight: '8px' }}>
+                Update Location
+              </Button>
+              <Button onClick={handleCurrentLocation} type="primary">
+                Use Current Location
+              </Button>
+            </div>
+          </>)}
           <div>
-            {booking.status === 'pending' && <Button onClick={handleCancelBooking} type="primary" danger>
-              Cancel Booking
+            {isDriver && booking.status === 'pending' && accepted && <Button onClick={handleCompleteBooking} type="primary" style={{ marginTop: 8 }}>
+              Mark as Completed
             </Button>}
           </div>
         </Card>
