@@ -222,7 +222,7 @@ const BookingView = ({ booking }) => {
             Status: {booking.status}
           </Typography.Paragraph>
           <Typography.Paragraph style={{ color: '#fff' }}>
-            {isDriver ? `Customer: ${booking.userId.username}` : `Driver: ${booking.driverId.driverNum} ${booking.driverId.rating}★`}
+            {isDriver ? `Customer: ${booking.userId.username}` : `Driver: ${booking.driverName} ${booking.vehiclePlate} ${booking.driverId.rating}★`}
           </Typography.Paragraph>
 
           {isDriver && (
