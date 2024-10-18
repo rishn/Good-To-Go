@@ -1,0 +1,11 @@
+.spinner-container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .not-found-container {
+    position: relative;
+    text-align: center;
+    padding: 50px;
+  }

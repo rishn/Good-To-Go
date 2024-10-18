@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, Button, Card, Typography, ConfigProvider, Spin, Modal, Form, Input, Space, Divider, message, Row, Col } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { useGetUsersQuery, useUpdateUserMutation } from '../features/users/usersApiSlice';
+import { useGetUsersQuery, useUpdateUserMutation, useDeleteUserMutation } from '../features/users/usersApiSlice';
 import { useGetDriversQuery } from '../features/drivers/driversApiSlice';
 import useAuth from '../hooks/useAuth';
 import useTitle from '../hooks/useTitle';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 const Profile = () => {
-  const { id, username, isDriver } = useAuth();
+  const { id, username, isDriver, isAdmin } = useAuth();
 
   useTitle(`${username} | Atlan Application`);
 
+  const navigate = useNavigate();
+
   const [updateUser] = useUpdateUserMutation();
+  const [deleteUser, { isSuccess: isDelUserSuccess }] = useDeleteUserMutation();
   const { data: usersResult, isSuccess: isUsersSuccess, isLoading: isUsersLoading } = useGetUsersQuery(undefined);
   const { data: driversResult, isSuccess: isDriversSuccess, isLoading: isDriversLoading } = useGetDriversQuery(undefined);
 
@@ -21,6 +27,14 @@ const Profile = () => {
   const [cPwd, setCPwd] = useState('');
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [form] = Form.useForm();
+
+  
+  useEffect(() => {
+    if (isDelUserSuccess) {
+        message.success("User deleted");
+        navigate('/'); 
+    }
+  }, [isDelUserSuccess, navigate]);  
 
   useEffect(() => {
     if (isUsersSuccess && usersResult) {
@@ -51,6 +65,11 @@ const Profile = () => {
     } catch (err) {
       message.error(err.data?.message);
     }
+  };
+
+  const onDeleteUserClicked = async () => {
+    await deleteUser({ id: id })
+    navigate('/');
   };
 
   if (isUsersLoading || isDriversLoading) {
@@ -163,6 +182,10 @@ const Profile = () => {
           </Form.Item>
         </Form>
       </Modal>
+      <Divider />
+      {!isDriver && !isAdmin && <Button danger onClick={onDeleteUserClicked} icon={<FontAwesomeIcon icon={faTrashCan} />}>
+        Remove Account
+      </Button>}
     </ConfigProvider>
   );
 };

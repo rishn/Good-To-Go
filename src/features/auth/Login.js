@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
-import { Form, Input, Button, Checkbox, message, Spin, Typography, ConfigProvider } from 'antd'
+import { Form, Input, Button, Checkbox, message, Spin, Typography, ConfigProvider, Divider } from 'antd'
 import usePersist from '../../hooks/usePersist'
 import useTitle from '../../hooks/useTitle'
 
@@ -37,9 +37,9 @@ const Login = () => {
             else if (err.status === 400) 
                 message.error('Missing Username or Password')
             else if (err.status === 401) 
-                message.error('Unauthorized')
+                message.error(err.data?.message || err.message)
             else 
-                message.error(err.data?.message || 'Login Failed')
+                message.error(err.data?.message || err.message || 'Login Failed')
         }
     }
 
@@ -59,7 +59,7 @@ const Login = () => {
                     }
                 }
             }}>
-                <Typography.Title level={2}>Employee Login</Typography.Title>
+                <Typography.Title level={2}>Login</Typography.Title>
                 <Form
                     name="login-form"
                     layout="vertical"
@@ -103,7 +103,7 @@ const Login = () => {
                         </Button>
                     </Form.Item>
                 </Form>
-
+                <Divider style={{ marginBottom: 10 }}/>
                 <footer>
                     <Link to="/">Back to Main</Link>
                 </footer>

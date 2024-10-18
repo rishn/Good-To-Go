@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useUpdateDriverMutation, useDeleteDriverMutation } from "./driversApiSlice"; // Update the import based on your API slice
+import { useUpdateDriverMutation, useDeleteDriverMutation } from "./driversApiSlice"; 
+import { useDeleteUserMutation } from "../users/usersApiSlice";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
@@ -10,6 +11,7 @@ const EditDriverForm = ({ driver, vehicles }) => {
     useTitle(`Edit ${driver.userId.username} Details | Atlan Application`)
     const [updateDriver, { isSuccess, isError, error }] = useUpdateDriverMutation();
     const [deleteDriver, { isSuccess: isDelSuccess }] = useDeleteDriverMutation();
+    const [deleteUser, { isSuccess: isDelUserSuccess }] = useDeleteUserMutation();
     
     const navigate = useNavigate();
     // Separate states for currentLocation lat and lng
@@ -26,11 +28,19 @@ const EditDriverForm = ({ driver, vehicles }) => {
             message.success("Driver updated successfully!");
             navigate('/atlan/drivers'); // Redirect to the drivers list
         }
-        else if (isDelSuccess) {
-            message.success("Driver deleted successfully!");
-            navigate('/atlan/drivers'); // Redirect to the drivers list
+    }, [isSuccess, navigate]);
+
+    useEffect(() => {
+        if (isDelSuccess) {
+            message.info("Driver deleted");}
+    }, [isDelSuccess]);
+
+    useEffect(() => {
+        if (isDelUserSuccess) {
+            message.success("User deleted");
+            navigate('/atlan/drivers'); 
         }
-    }, [isSuccess, isDelSuccess, navigate]);
+    }, [isDelUserSuccess, navigate]);
 
     const onFinish = async (values) => {
         // Construct currentLocation object from lat and lng values
@@ -50,6 +60,7 @@ const EditDriverForm = ({ driver, vehicles }) => {
 
     const onDeleteDriverClicked = async () => {
         await deleteDriver({ id: driver.id });
+        await deleteUser({ id: driver.userId })
     };
 
     return (

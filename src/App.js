@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Public from './components/Public';
@@ -14,11 +15,12 @@ import NewVehicleForm from './features/vehicles/NewVehicleForm';
 import AdminList from './features/users/AdminList';
 import EditAdminForm from './features/users/EditAdminForm';
 import NewAdminForm from './features/users/NewAdminForm';
-import BookingList from './features/bookings/BookingList'; // Importing BookingList component
+import BookingList from './features/bookings/BookingList'; 
 import NewBookingForm from './features/bookings/NewBookingForm';
 import AdminDashboard from './features/users/AdminDashboard';
 import BookingView from './features/bookings/BookingView';
 import Profile from './components/Profile';
+import NotFound from './features/auth/NotFound';
 import Prefetch from './features/auth/Prefetch';
 import PersistLogin from './features/auth/PersistLogin';
 import RequireAuth from './features/auth/RequireAuth';
@@ -27,12 +29,12 @@ import useTitle from './hooks/useTitle';
 import { useGetUsersQuery } from './features/users/usersApiSlice';
 import { useGetDriversQuery } from './features/drivers/driversApiSlice'; 
 import { useGetVehiclesQuery } from './features/vehicles/vehiclesApiSlice';
-import { useGetBookingsQuery } from './features/bookings/bookingsApiSlice'; // Importing useGetBookingsQuery
+import { useGetBookingsQuery } from './features/bookings/bookingsApiSlice'; 
 import useAuth from './hooks/useAuth'; // Importing useAuth for determining logged-in user roles
+import { Spin } from 'antd';
 
 function App() {
   useTitle('Atlan Application');
-
   const { id, isDriver, isAdmin } = useAuth(); // Use useAuth to get logged-in user details
 
   const { data: usersResult, isSuccess: isUsersSuccess, isLoading: isUsersLoading } = useGetUsersQuery(undefined);
@@ -103,7 +105,7 @@ function App() {
                         element={<EditDriverForm driver={driver} vehicles={vehicles} />}
                       />
                     ))}
-                    <Route path="new" element={<NewDriverForm vehicles={vehicles}/>} />
+                    <Route path="new" element={<NewDriverForm vehicles={vehicles} />} />
                   </Route>
 
                   <Route path="admins">
@@ -133,7 +135,7 @@ function App() {
 
                 {/* Customer Bookings */}
                 <Route element={<RequireAuth allowedRoles={[ROLES.Customer, ROLES.Driver]} />}>
-                  <Route path="bookings"> 
+                  <Route path="bookings">
                     <Route index element={<BookingList bookings={isDriver ? driverBookings : customerBookings} />} />
                     {(isDriver ? driverBookings : customerBookings).map((booking) => (
                       <Route
@@ -151,6 +153,7 @@ function App() {
                 </Route>
 
                 <Route path="profile" element={<Profile />} />
+                <Route path="*" element={<NotFound />} />
               </Route>
               {/* End dashboard */}
             </Route>

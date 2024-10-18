@@ -253,9 +253,9 @@ const BookingView = ({ booking }) => {
             </>
           )}
           <div>
-            <Button onClick={handleCancelBooking} type="primary" danger>
+            {booking.status === 'pending' && <Button onClick={handleCancelBooking} type="primary" danger>
               Cancel Booking
-            </Button>
+            </Button>}
           </div>
         </Card>
         <div id="map" style={{ height: '400px' }}></div>
