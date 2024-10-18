@@ -24,11 +24,11 @@ const EditDriverForm = ({ driver, vehicles }) => {
     useEffect(() => {
         if (isSuccess) {
             message.success("Driver updated successfully!");
-            navigate('/dash/drivers'); // Redirect to the drivers list
+            navigate('/atlan/drivers'); // Redirect to the drivers list
         }
         else if (isDelSuccess) {
             message.success("Driver deleted successfully!");
-            navigate('/dash/drivers'); // Redirect to the drivers list
+            navigate('/atlan/drivers'); // Redirect to the drivers list
         }
     }, [isSuccess, isDelSuccess, navigate]);
 

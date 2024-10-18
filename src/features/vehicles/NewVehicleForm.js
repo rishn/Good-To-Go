@@ -20,7 +20,7 @@ const NewVehicleForm = () => {
     useEffect(() => {
         if (isSuccess) {
             message.success("Vehicle created successfully!");
-            navigate('/dash/vehicles'); // Redirect to the vehicles list
+            navigate('/atlan/vehicles'); // Redirect to the vehicles list
         } else if (isError) {
             message.error(`Vehicle creation failed: ${error?.data?.message || error?.message}`);
         }

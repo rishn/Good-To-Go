@@ -4,18 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import useTitle from "../../hooks/useTitle";
 
 const VehicleList = ({ vehicles }) => {
-  useTitle('Vehicles | MEXA');
+  useTitle('Vehicles | Atlan Application');
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10; // Number of items per page
 
   const handleRowClick = (vehicle) => {
-    navigate(`/dash/vehicles/${vehicle.split(' ').join('')}`); // Routing to EditVehicle component based on vehicleId
+    navigate(`/atlan/vehicles/${vehicle.split(' ').join('')}`); // Routing to EditVehicle component based on vehicleId
   };
   
   const handleAddVehicleClick = () => {
-    navigate('/dash/vehicles/new'); // Routing to AddVehicle component
+    navigate('/atlan/vehicles/new'); // Routing to AddVehicle component
   };
 
   const filteredVehicles = vehicles.filter((vehicle) => {

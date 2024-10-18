@@ -21,7 +21,7 @@ const NewAdminForm = () => {
     useEffect(() => {
         if (isSuccess) {
             message.success("User created successfully!");
-            navigate('/dash/admins');
+            navigate('/atlan/admins');
         } else if (isError) {
             message.error(`User creation failed: ${error?.data?.message || error?.message}`);
         } 

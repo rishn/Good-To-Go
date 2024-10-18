@@ -11,11 +11,11 @@ const AdminList = ({ admins }) => {
   const pageSize = 10; // Number of items per page
 
   const handleRowClick = (username) => {
-    navigate(`/dash/admins/${username}`); // Routing to EditUser component based on driverNum
+    navigate(`/atlan/admins/${username}`); // Routing to EditUser component based on driverNum
   };
   
   const handleAddAdminClick = () => {
-    navigate('/dash/admins/new'); // Routing to AddDriver component
+    navigate('/atlan/admins/new'); // Routing to AddDriver component
   };
 
   const filteredAdmins = admins.filter((admin) => {

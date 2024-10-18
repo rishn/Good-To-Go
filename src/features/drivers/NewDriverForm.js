@@ -36,7 +36,7 @@ const NewDriverForm = ({vehicles}) => {
         
         if (userSuccess && driverSuccess) {
             message.success("Driver created successfully!");
-            navigate('/dash/drivers'); // Redirect to the drivers list
+            navigate('/atlan/drivers'); // Redirect to the drivers list
         }
     }, [userSuccess, driverSuccess, userError, driverError, navigate, userErrorMsg, driverErrorMsg]);
 

@@ -223,7 +223,7 @@ const NewBookingForm = ({ drivers }) => {
                 await deleteBooking({ id: newBooking.id });
 
         message.success('Booking Confirmed!');
-        navigate('/dash/bookings'); // Redirect to bookings list
+        navigate('/atlan/bookings'); // Redirect to bookings list
     };
 
     async function handleCancelBooking(newBookings) {
@@ -235,7 +235,7 @@ const NewBookingForm = ({ drivers }) => {
         for (const booking of newBookings)
             await deleteBooking({ id: booking.id });
         message.info('Booking cancelled');
-        navigate('/dash/bookings');
+        navigate('/atlan/bookings');
     };
 
     const handleGeocode = async (address, setLocation) => {

@@ -4,18 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import useTitle from "../../hooks/useTitle";
 
 const DriverList = ({ drivers }) => {
-  useTitle('Drivers | MEXA');
+  useTitle('Drivers | Atlan Application');
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10; // Number of items per page
 
   const handleRowClick = (driverNum) => {
-    navigate(`/dash/drivers/${driverNum}`); // Routing to EditUser component based on driverNum
+    navigate(`/atlan/drivers/${driverNum}`); // Routing to EditUser component based on driverNum
   };
   
   const handleAddDriverClick = () => {
-    navigate('/dash/drivers/new'); // Routing to AddDriver component
+    navigate('/atlan/drivers/new'); // Routing to AddDriver component
   };
 
   const filteredDrivers = drivers.filter((driver) => {

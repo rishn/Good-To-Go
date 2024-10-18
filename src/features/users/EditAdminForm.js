@@ -20,11 +20,11 @@ const EditAdminForm = ({ admin }) => {
     useEffect(() => {
         if (isSuccess) {
             message.success("Admin updated successfully!");
-            navigate('/dash/admins'); // Redirect to the drivers list
+            navigate('/atlan/admins'); // Redirect to the drivers list
         }
         else if (isDelSuccess) {
             message.success("Admin deleted successfully!");
-            navigate('/dash/admins'); // Redirect to the drivers list
+            navigate('/atlan/admins'); // Redirect to the drivers list
         }
     }, [isSuccess, isDelSuccess, navigate]);
 

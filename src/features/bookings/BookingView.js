@@ -41,12 +41,20 @@ const BookingView = ({ booking }) => {
       shadowSize: [41, 41]
     });
 
+    const carMarkerIcon = new L.Icon({
+      iconUrl: '/car_marker.png', // Update with car icon URL
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+  });
+
     // Markers for pickup and dropoff locations
     const pickupMarker = L.marker([booking.pickupLocation.lat, booking.pickupLocation.lng], { icon: customMarkerIcon }).addTo(map).bindPopup('Pickup Location');
     const dropoffMarker = L.marker([booking.dropoffLocation.lat, booking.dropoffLocation.lng], { icon: customMarkerIcon }).addTo(map).bindPopup('Dropoff Location');
     
     // Driver location marker
-    const driverMarker = L.marker([driverLocation.lat, driverLocation.lng], { icon: customMarkerIcon }).addTo(map).bindPopup(`Driver Location: ${booking.driverId.driverNum}`);
+    const driverMarker = L.marker([driverLocation.lat, driverLocation.lng], { icon: carMarkerIcon }).addTo(map).bindPopup(`Driver Location: ${booking.driverId.driverNum}`);
 
     // Draw route from pickup to dropoff
     const drawRoute = async (start, end) => {
@@ -128,7 +136,7 @@ const BookingView = ({ booking }) => {
         await deleteBooking({ id: booking._id || booking.id });
 
       message.info('Booking canceled');
-      navigate('/dash/bookings');
+      navigate('/atlan/bookings');
     } catch (error) {
       message.error('Error canceling booking.');
     }

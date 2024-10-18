@@ -19,11 +19,11 @@ const EditVehicleForm = ({ vehicle }) => {
     useEffect(() => {
         if (isSuccess) {
             message.success("Vehicle updated successfully!");
-            navigate('/dash/vehicles'); // Redirect to the vehicle list
+            navigate('/atlan/vehicles'); // Redirect to the vehicle list
         }
         else if (isDelSuccess) {
             message.success("Vehicle deleted successfully!");
-            navigate('/dash/vehicles'); // Redirect to the vehicle list
+            navigate('/atlan/vehicles'); // Redirect to the vehicle list
         }
     }, [isSuccess, isDelSuccess, navigate]);
 

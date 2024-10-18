@@ -25,13 +25,13 @@ const Welcome = () => {
                 {!isAdmin && !isDriver && (
                     <>
                         {/* Links for Vehicles */}
-                        <Link to="/dash/bookings">
+                        <Link to="/atlan/bookings">
                             <Button type="primary" block>
                                 View Bookings
                             </Button>
                         </Link>
         
-                        <Link to="/dash/bookings/new">
+                        <Link to="/atlan/bookings/new">
                             <Button style={{backgroundColor: "#222" }} block>
                                 Add Booking
                             </Button>
@@ -42,39 +42,39 @@ const Welcome = () => {
                 {isAdmin && (
                     <>
                         {/* Links for Vehicles */}
-                        <Link to="/dash/vehicles">
+                        <Link to="/atlan/vehicles">
                             <Button type="primary" block>
                                 Manage Vehicles
                             </Button>
                         </Link>
         
-                        <Link to="/dash/vehicles/new">
+                        <Link to="/atlan/vehicles/new">
                             <Button style={{backgroundColor: "#222" }} block>
                                 Add Vehicle
                             </Button>
                         </Link>
 
                         {/* Links for Managing Drivers */}
-                        <Link to="/dash/drivers">
+                        <Link to="/atlan/drivers">
                             <Button type="primary" block>
                                 Manage Drivers
                             </Button>
                         </Link>
 
-                        <Link to="/dash/drivers/new">
+                        <Link to="/atlan/drivers/new">
                             <Button style={{backgroundColor: "#222" }} block>
                                 Add Driver
                             </Button>
                         </Link>
 
                         {/* Links for Managing Admins */}
-                        <Link to="/dash/admins">
+                        <Link to="/atlan/admins">
                             <Button type="primary" block>
                                 Manage Admins
                             </Button>
                         </Link>
 
-                        <Link to="/dash/admins/new">
+                        <Link to="/atlan/admins/new">
                             <Button style={{backgroundColor: "#222" }} block>
                                 Add Admin
                             </Button>

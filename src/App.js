@@ -16,7 +16,9 @@ import EditAdminForm from './features/users/EditAdminForm';
 import NewAdminForm from './features/users/NewAdminForm';
 import BookingList from './features/bookings/BookingList'; // Importing BookingList component
 import NewBookingForm from './features/bookings/NewBookingForm';
+import AdminDashboard from './features/users/AdminDashboard';
 import BookingView from './features/bookings/BookingView';
+import Profile from './components/Profile';
 import Prefetch from './features/auth/Prefetch';
 import PersistLogin from './features/auth/PersistLogin';
 import RequireAuth from './features/auth/RequireAuth';
@@ -84,16 +86,17 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
             <Route element={<Prefetch />}>
               {/* Dashboard */}
-              <Route path="dash" element={<DashLayout />}>
+              <Route path="atlan" element={<DashLayout />}>
                 <Route index element={<Welcome />} />
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                  <Route path="analytics" element={<AdminDashboard />} />
                   <Route path="drivers">
                     <Route index element={<DriverList drivers={drivers} />} />
                     {drivers.map((driver) => (
                       <Route
                         key={driver.driverNum}
-                        path={`/dash/drivers/${driver.driverNum}`}
+                        path={`/atlan/drivers/${driver.driverNum}`}
                         element={<EditDriverForm driver={driver} vehicles={vehicles} />}
                       />
                     ))}
@@ -105,7 +108,7 @@ function App() {
                     {admins.map((admin) => (
                       <Route
                         key={admin.username}
-                        path={`/dash/admins/${admin.username}`}
+                        path={`/atlan/admins/${admin.username}`}
                         element={<EditAdminForm admin={admin} />}
                       />
                     ))}
@@ -117,7 +120,7 @@ function App() {
                     {vehicles.map((vehicle) => (
                       <Route
                         key={vehicle.licensePlate}
-                        path={`/dash/vehicles/${vehicle.licensePlate.split(' ').join('')}`}
+                        path={`/atlan/vehicles/${vehicle.licensePlate.split(' ').join('')}`}
                         element={<EditVehicleForm vehicle={vehicle} />}
                       />
                     ))}
@@ -132,7 +135,7 @@ function App() {
                     {(isDriver ? driverBookings : customerBookings).map((booking) => (
                       <Route
                         key={booking.id || booking._id}
-                        path={`/dash/bookings/${booking.id || booking._id}`}
+                        path={`/atlan/bookings/${booking.id || booking._id}`}
                         element={<BookingView booking={booking} />}
                       />
                     ))}
@@ -144,6 +147,7 @@ function App() {
                   <Route path="bookings/new" element={<NewBookingForm drivers={drivers} />} />
                 </Route>
 
+                <Route path="profile" element={<Profile />} />
               </Route>
               {/* End dashboard */}
             </Route>

@@ -15,11 +15,11 @@ const BookingList = ({ bookings }) => {
   const pageSize = 10; // Number of items per page
 
   const handleRowClick = (bookingId) => {
-    navigate(`/dash/bookings/${bookingId}`); // Routing to EditBooking component based on bookingId
+    navigate(`/atlan/bookings/${bookingId}`); // Routing to EditBooking component based on bookingId
   };
 
   const handleAddBookingClick = () => {
-    navigate('/dash/bookings/new'); // Routing to AddBooking component
+    navigate('/atlan/bookings/new'); // Routing to AddBooking component
   };
 
   const filteredBookings = bookings.filter((booking) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Menu, ConfigProvider, Avatar, Button, Dropdown, Space } from 'antd';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { HomeOutlined, TeamOutlined, LogoutOutlined, CheckCircleOutlined, CarOutlined, KeyOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, BarChartOutlined, HomeOutlined, TeamOutlined, LogoutOutlined, UserOutlined, CheckCircleOutlined, CarOutlined, KeyOutlined } from '@ant-design/icons';
 import { useSendLogoutMutation } from '../features/auth/authApiSlice';
 import useAuth from '../hooks/useAuth';
 import { Outlet } from 'react-router-dom';
@@ -22,6 +22,9 @@ const DashLayout = () => {
 
     const profileMenu = (
         <Menu>
+            <Menu.Item key="profile" icon={<UserOutlined />} onClick={()=>{navigate('/atlan/profile')}}>
+                Profile
+            </Menu.Item>
             <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={onLogoutClicked}>
                 Logout
             </Menu.Item>
@@ -45,27 +48,34 @@ const DashLayout = () => {
                 style={{ height: '100%', borderRight: 0, backgroundColor: "transparent", color: "#fff" }} // Make the background transparent
             >
                 <Menu.Item key="home" icon={<HomeOutlined />}>
-                    <Link to="/dash">Home</Link>
+                    <Link to="/atlan">Home</Link>
+                </Menu.Item>
+                <Menu.Item key="profile" icon={<UserOutlined />}>
+                    <Link to="/atlan/profile">Profile</Link>
                 </Menu.Item>
                 {(isDriver || !isAdmin) && (
                     <Menu.Item key="manage-bookings" icon={<CheckCircleOutlined />}>
-                        <Link to="/dash/bookings">Bookings</Link>
+                        <Link to="/atlan/bookings">Bookings</Link>
                     </Menu.Item>
-
                 )}
                 {isAdmin && (
                     <Menu.Item key="manage-users" icon={<TeamOutlined />}>
-                        <Link to="/dash/drivers">Drivers</Link>
+                        <Link to="/atlan/drivers">Drivers</Link>
                     </Menu.Item>
                 )}
                 {isAdmin && (
                     <Menu.Item key="manage-admins" icon={<KeyOutlined />}>
-                        <Link to="/dash/admins">Admins</Link>
+                        <Link to="/atlan/admins">Admins</Link>
                     </Menu.Item>
                 )}
                 {isAdmin && (
                     <Menu.Item key="manage-vehicles" icon={<CarOutlined />}>
-                        <Link to="/dash/vehicles">Vehicles</Link>
+                        <Link to="/atlan/vehicles">Vehicles</Link>
+                    </Menu.Item>
+                )}
+                {isAdmin && (
+                    <Menu.Item key="analytics" icon={<BarChartOutlined />}>
+                        <Link to="/atlan/analytics">Analytics</Link>
                     </Menu.Item>
                 )}
             </Menu>
@@ -86,10 +96,13 @@ const DashLayout = () => {
                 {/* Header */}
                 <Header style={{ backgroundColor: '#0f172a', padding: '0 20px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Link to="/dash" style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold' }}>
+                        <Link to="/atlan" style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold' }}>
                             Atlan Application
                         </Link>
                         <Space>
+                            <Button type="text" shape="circle" icon={<ArrowLeftOutlined />}
+                                onClick={() => { window.history.back(); }}>
+                            </Button>
                             <p style={{ color: '#fff', margin: '0 8px' }}>{username}</p>
                             <p style={{ color: '#fff', margin: '0 8px' }}>{status}</p>
                             <Dropdown overlay={profileMenu}>
