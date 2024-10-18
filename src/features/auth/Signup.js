@@ -87,6 +87,9 @@ const Signup = () => {
                         </Button>
                     </Form.Item>
                 </Form>
+                <footer>
+                    <Link to="/">Back to Main</Link>
+                </footer>
             </ConfigProvider>
         </section>
     )
