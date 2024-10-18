@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Form, Input, Button, ConfigProvider, Typography, message } from 'antd'
 import { useAddNewUserMutation } from '../users/usersApiSlice'
 import useTitle from '../../hooks/useTitle'
+import Link from 'antd/es/typography/Link'
 
 const Signup = () => {
     useTitle('Customer Signup | Atlan Application')
