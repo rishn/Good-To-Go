@@ -76,6 +76,9 @@ The challenge was to develop a frontend interface that handles **real-time booki
 
 ---
 
+## Documentation
+[Please find documentation about the project here](https://drive.google.com/file/d/1g1hRTB8srE38dhVV7SR0mOsBzyyiw6LT/view?usp=sharing)
+
 ## Diagrams
 
 ### ER Diagram
