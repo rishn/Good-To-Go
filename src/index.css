@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* || VARIABLES */
+
+:root {
+  /* COLORS */
+  --BGCOLOR: #375f7b;
+  --BGCOLOR-LIGHT: #5b6373;
+  --BORDER-COLOR: #FFF;
+  --COLOR: #FFF;
+  --ERROR: firebrick;
+  --INACTIVE: lightgray;
+  --LINK-COLOR: whitesmoke;
+  --LINK-HOVER: rgba(245, 245, 245, 0.9);
+  --NOTE-BGCOLOR: hsla(240, 64%, 27%, 0.65);
+  --STATUS-COMPLETE: limegreen;
+  --STATUS-OPEN: firebrick;
+  --TABLE-BGCOLOR: #FFF;
+  --TABLE-COLOR: #000;
+  --INPUT-INVALID: #F00;
+  --primary: #264255;
+}
+
+/* || UTILITY CLASSES */
+.errmsg {
+  display: inline-block;
+  background-color: var(--TABLE-BGCOLOR);
+  color: var(--ERROR);
+  padding: 0.25em;
+  margin-bottom: 0.5em;
+}
+
+.errmsg a:any-link {
+  color: var(--ERROR);
+  text-decoration: underline;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Full layout of the dash */
+.dash-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure full page height */
+  background-image: url('./img/background.png'); /* Add your background image here */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Body content area with Sidebar and Outlet */
+.dash-body {
+  display: flex;
+  flex-grow: 1;
+  padding: 1em;
+}
+
+/* Sidebar styling */
+.sider {
+  width: 200px;
+  background-color: rgb(15, 23, 42); 
+}
+
+/* Content area (where Outlet renders the component) */
+.dash-container {
+  padding: 1.5em;
+  flex-grow: 1;
+  background-color: rgb(15, 23, 42, 0.6); /* A semi-transparent background to maintain visibility */
+  margin-left: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header and Footer styling */
+.dash-header__container, .dash-footer__container {
+  background-color: rgba(0, 0, 0, 0.7); /* Darken header and footer */
+  color: white;
+  padding: 0.5em;
+}
+
+/* Ensure the layout scales on different screen sizes */
+@media (max-width: 768px) {
+  .dash-body {
+    flex-direction: column; /* Stack sidebar on top on smaller screens */
+  }
+
+  .dash-container {
+    margin-left: 0;
+    margin-top: 1em;
+  }
+
+  .sider {
+    width: 100%;
+  }
+}
+
+.icon-button {
+  width: 48px;
+  height: 48px;
+  font-size: 2.5rem;
+  background-color: transparent;
+  border: none;
+  color: var(--COLOR);
+  display: grid;
+  place-content: center;
+}
+
+.icon-button:hover,
+.icon-button:focus-visible {
+  transform: scale(1.2);
+}
+
+.icon-button[disabled] {
+  visibility: hidden;
+}
+
+/* || GENERAL STYLES */
+
+body {
+  font-family: 'Nunito', sans-serif;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); 
+  color: var(--COLOR);
+  background-image: url('./img/background.png');
+  background-size: cover;
+  background-position: top right;
+  background-blend-mode: multiply;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+#root {
+  /* React root div */
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:any-link {
+  color: var(--LINK-COLOR);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--LINK-HOVER);
+}
+
+/* || PAGES */
+
+.public,
+.welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.public {
+  padding: 1em;
+  flex-grow: 1;
+}
+
+.public__main,
+.login {
+  flex-grow: 1;
+  border-top: 2px solid var(--BORDER-COLOR);
+  border-bottom: 2px solid var(--BORDER-COLOR);
+  padding: 1em 0;
+}
+
+.public__addr {
+  margin-top: 1em;
+}
+
+.welcome a::before {
+  content: "➜ "
+}
+
+.ant-modal-content {
+  background-color: #888 !important; /* Background color */
+  color: #fff !important;           /* Text color */
+}
+
+.ant-modal-title {
+  color: #fff !important; /* Title color */
+}
+
+.ant-modal-footer .ant-btn-primary {
+  background-color: #264255 !important; /* OK button background */
+  color: #fff;
+}
+
+.ant-modal-footer .ant-btn-primary:hover {
+  background-color: #264255 !important; /* OK button hover */
+  color: #fff;
+}
