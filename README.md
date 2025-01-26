@@ -5,11 +5,11 @@
 Good to Go! is an on-demand logistics platform that allows for efficient management of bookings, drivers, and vehicles. It serves customers, drivers, and admins with tailored functionalities for each user base. The frontend provides a responsive and intuitive user interface to manage logistics operations effectively.
 
 <p align="center">
-  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/public/background.png" alt="Image" />
+  <img src="https://github.com/rishn/Good-To-Go/blob/main/public/background.png" alt="Image" />
 </p>
 
 ### Deployed Link
-[View the live site here](https://atlangoodsapplication.onrender.com)
+[View the live site here](https://goodtogoapp.onrender.com)
 
 ### Demo Videos
 
@@ -66,12 +66,12 @@ The challenge was to develop a frontend interface that handles **real-time booki
 
 ### Finding Driver
 <p align="center">
-  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/outputs/finding_driver.png" alt="Finding Driver" />
+  <img src="https://github.com/rishn/Good-To-Go/blob/main/outputs/finding_driver.png" alt="Finding Driver" />
 </p>
 
 ### Analytics Dashboard
 <p align="center">
-  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/outputs/analytics.png" alt="Analytics" />
+  <img src="https://github.com/rishn/Good-To-Go/blob/main/outputs/analytics.png" alt="Analytics" />
 </p>
 
 ---
@@ -83,17 +83,17 @@ The challenge was to develop a frontend interface that handles **real-time booki
 
 ### ER Diagram
 <p align="center">
-  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/diagrams/er_diagram.png" alt="ER Diagram" />
+  <img src="https://github.com/rishn/Good-To-Go/blob/main/diagrams/er_diagram.png" alt="ER Diagram" />
 </p>
 
 ### Flow Diagram
 <p align="center">
-  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/diagrams/flow_diagram.png" alt="Flow Diagram" />
+  <img src="https://github.com/rishn/Good-To-Go/blob/main/diagrams/flow_diagram.png" alt="Flow Diagram" />
 </p>
 
 ### HL Diagram
 <p align="center">
-  <img src="https://github.com/rishn/Atlan-Engineering-Internship-Task/blob/main/diagrams/hl_diagram.png" alt="HL Diagram" />
+  <img src="https://github.com/rishn/Good-To-Go/blob/main/diagrams/hl_diagram.png" alt="HL Diagram" />
 </p>
 
 
