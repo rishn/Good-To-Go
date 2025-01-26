@@ -9,10 +9,7 @@ Good to Go! is an on-demand logistics platform that allows for efficient managem
 </p>
 
 ### Deployed Link
-[View the live site here](https://atlangoodsapplication.onrender.com) 
-
-### Video Explanation
-[View the explanation video here](https://drive.google.com/file/d/1jl3SyXi_6MKU0wrjauBNj-_ufbozkWxM/view?usp=sharing)
+[View the live site here](https://atlangoodsapplication.onrender.com)
 
 ### Demo Videos
 
