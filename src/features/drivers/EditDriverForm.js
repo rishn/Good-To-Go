@@ -8,7 +8,7 @@ import { Input, Checkbox, Button, Typography, Form, message, ConfigProvider, Row
 import useTitle from "../../hooks/useTitle";
 
 const EditDriverForm = ({ driver, vehicles }) => {
-    useTitle(`Edit ${driver.userId.username} Details | Atlan Application`)
+    useTitle(`Edit ${driver.userId.username} Details | Good to Go!`)
     const [updateDriver, { isSuccess, isError, error }] = useUpdateDriverMutation();
     const [deleteDriver, { isSuccess: isDelSuccess }] = useDeleteDriverMutation();
     const [deleteUser, { isSuccess: isDelUserSuccess }] = useDeleteUserMutation();
@@ -64,14 +64,17 @@ const EditDriverForm = ({ driver, vehicles }) => {
     };
 
     return (
-        <ConfigProvider
-            theme={{
-                token: {
-                    colorText: "#fff",
-                    colorTextBase: "#eee"
-                },
-            }}
-        >
+        <ConfigProvider theme={{
+          components: {
+            Input: {
+              colorBgContainer: 'rgba(100, 100, 100, 0.4)', 
+              colorText: "#fff", // White text
+            }
+          },
+          token: {
+            colorTextPlaceholder: "#aaa"
+          }
+        }}>
             <Form
                 layout="vertical"
                 onFinish={onFinish}
@@ -81,7 +84,7 @@ const EditDriverForm = ({ driver, vehicles }) => {
                 <Typography.Title level={3}>{driver.userId.username}</Typography.Title>
 
                 <Form.Item label="Driver Number" name="driverNum" initialValue={driverNum}>
-                    <Input placeholder="Enter Driver Number" style={{ backgroundColor: "#222" }} />
+                    <Input placeholder="Enter Driver Number" />
                 </Form.Item>
 
                 {/* Fields for Latitude and Longitude */}
@@ -96,7 +99,6 @@ const EditDriverForm = ({ driver, vehicles }) => {
                             <Input
                                 placeholder="Enter Latitude"
                                 onChange={(e) => setLat(e.target.value)}  
-                                style={{ backgroundColor: "#222" }}
                             />
                         </Form.Item>
                     </Col>
@@ -109,8 +111,7 @@ const EditDriverForm = ({ driver, vehicles }) => {
                         >
                             <Input
                                 placeholder="Enter Longitude"
-                                onChange={(e) => setLng(e.target.value)}  
-                                style={{ backgroundColor: "#222" }}
+                                onChange={(e) => setLng(e.target.value)}
                             />
                         </Form.Item>
                     </Col>
@@ -127,7 +128,7 @@ const EditDriverForm = ({ driver, vehicles }) => {
                         placeholder="Select a Vehicle"
                         value={vehicleId}
                         onChange={setVehicleId}
-                        style={{ backgroundColor: "#222" }}
+                       
                     >
                         {vehicles?.map(vehicle => (
                             <Select.Option key={vehicle._id} value={vehicle._id}>

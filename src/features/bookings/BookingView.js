@@ -12,7 +12,7 @@ import { geocode } from 'opencage-api-client';
 import { useNavigate } from 'react-router-dom';
 
 const BookingView = ({ booking }) => {
-  useTitle(`${booking.userId.username}'s ${booking.item} Transport | Atlan Application`);
+  useTitle(`${booking.userId.username}'s ${booking.item} Transport | Good to Go!`);
   const { isDriver } = useAuth();
 
   const navigate = useNavigate(); 
@@ -193,11 +193,15 @@ const BookingView = ({ booking }) => {
       theme={{
         components: {
           Card: {
-            colorBgContainer: '#1f1f1f',
+            colorBgContainer: 'rgba(100, 100, 100, 0.4)',
             colorText: '#fff',
-            colorTextHeading: '#fff',
+            colorTextHeading: '#fff', 
+            colorBorder: 'transparent'
           },
         },
+        token: {
+          colorTextPlaceholder: "#aaa"
+        }
       }}
     >
       <div style={{ padding: '20px 40px' }}>

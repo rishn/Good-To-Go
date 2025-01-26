@@ -7,7 +7,7 @@ import { Input, Button, Typography, Form, message, ConfigProvider, Select, Row, 
 import useTitle from "../../hooks/useTitle";
 
 const NewVehicleForm = () => {
-    useTitle('Add Vehicle | Atlan Application')
+    useTitle('Add Vehicle | Good to Go!')
     const [addNewVehicle, { isSuccess, isError, error }] = useAddNewVehicleMutation();
     const navigate = useNavigate();
 
@@ -42,12 +42,16 @@ const NewVehicleForm = () => {
             theme={{
                 token: {
                     colorText: "#fff",
-                    colorTextBase: "#eee"
+                    colorTextPlaceholder: "#aaa",
                 },
                 components: {
                     Select: {
-                        colorBgBase: "#222",
-                        colorBgContainer: "#222"
+                        colorBgBase: "rgba(100, 100, 100, 0.4)",
+                        colorBgContainer: "rgba(100, 100, 100, 0.4)"
+                    },
+                    Input: {
+                        colorBgContainer: 'rgba(100, 100, 100, 0.4)', 
+                        colorText: "#fff", // White text
                     }
                 }
             }}
@@ -60,10 +64,9 @@ const NewVehicleForm = () => {
                 <Typography.Title level={2}>New Vehicle</Typography.Title>
 
                 {/* Vehicle Type */}
-                <Form.Item label="Type" name="type" initialValue={type} rules={[{ required: true, message: "Please select a vehicle type" }]}>
+                <Form.Item label="Type" name="type" rules={[{ required: true, message: "Please select a vehicle type" }]}>
                     <Select
                         placeholder="Select Vehicle Type"
-                        style={{ backgroundColor: "#222" }}
                         onChange={(value) => setType(value)}
                         options={[
                             { label: 'Bike', value: 'bike' },
@@ -82,7 +85,6 @@ const NewVehicleForm = () => {
                     <Input
                         placeholder="Enter License Plate"
                         onChange={(e) => setLicensePlate(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -95,7 +97,6 @@ const NewVehicleForm = () => {
                     <Input
                         placeholder="Enter Capacity"
                         onChange={(e) => setCapacity(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 

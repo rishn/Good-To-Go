@@ -7,7 +7,7 @@ import { Input, Button, Typography, Form, message, ConfigProvider, Select } from
 import useTitle from "../../hooks/useTitle";
 
 const EditVehicleForm = ({ vehicle }) => {
-    useTitle(`Edit ${vehicle.licensePlate} Details | Atlan Application`)
+    useTitle(`Edit ${vehicle.licensePlate} Details | Good to Go!`)
     const [updateVehicle, { isSuccess, isError, error }] = useUpdateVehicleMutation();
     const [deleteVehicle, { isSuccess: isDelSuccess }] = useDeleteVehicleMutation();
     const navigate = useNavigate();
@@ -40,10 +40,15 @@ const EditVehicleForm = ({ vehicle }) => {
 
     return (
         <ConfigProvider theme={{
-            token: {
-                colorText: "#fff",
-                colorTextBase: "#eee"
-            },
+          components: {
+            Input: {
+              colorBgContainer: 'rgba(100, 100, 100, 0.4)', 
+              colorText: "#fff", // White text
+            }
+          },
+          token: {
+            colorTextPlaceholder: "#aaa"
+          }
         }}>
             <Form layout="vertical" onFinish={onFinish} style={{ maxWidth: 600, margin: 'auto' }}>
                 <Typography.Title level={2}>Edit Vehicle</Typography.Title>
@@ -51,7 +56,6 @@ const EditVehicleForm = ({ vehicle }) => {
                 <Form.Item label="Type" name="type" initialValue={type} rules={[{ required: true, message: "Please select a vehicle type" }]}>
                     <Select
                         placeholder="Select Vehicle Type"
-                        style={{ backgroundColor: "#222" }}
                         onChange={(value) => setType(value)}
                         options={[
                             { label: 'Bike', value: 'bike' },
@@ -64,7 +68,6 @@ const EditVehicleForm = ({ vehicle }) => {
                 <Form.Item label="License Plate" name="licensePlate" initialValue={licensePlate} rules={[{ required: true, message: "Please enter the license plate" }]}>
                     <Input
                         placeholder="Enter License Plate"
-                        style={{ backgroundColor: "#222" }}
                         onChange={(e) => setLicensePlate(e.target.value)}
                     />
                 </Form.Item>
@@ -72,7 +75,6 @@ const EditVehicleForm = ({ vehicle }) => {
                 <Form.Item label="Capacity" name="capacity" initialValue={capacity} rules={[{ required: true, message: "Please enter the capacity" }]}>
                     <Input
                         placeholder="Enter Vehicle Capacity"
-                        style={{ backgroundColor: "#222" }}
                         onChange={(e) => setCapacity(e.target.value)}
                     />
                 </Form.Item>

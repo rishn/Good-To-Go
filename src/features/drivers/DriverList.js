@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useTitle from "../../hooks/useTitle";
 
 const DriverList = ({ drivers }) => {
-  useTitle('Drivers | Atlan Application');
+  useTitle('Drivers | Good to Go!');
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,14 +37,18 @@ const DriverList = ({ drivers }) => {
     <ConfigProvider theme={{
       components: {
         Input: {
-          colorBgContainer: '#2b2b2b', // Dark background for input
+          colorBgContainer: '#2d2d2d', 
           colorText: "#fff", // White text
         },
         Card: {
-          colorBgContainer: '#1f1f1f',
+          colorBgContainer: 'rgba(100, 100, 100, 0.4)',
           colorText: '#fff',
-          colorTextHeading: '#fff'
+          colorTextHeading: '#fff', 
+          colorBorder: 'transparent'
         }
+      },
+      token: {
+        colorTextPlaceholder: "#aaa"
       }
     }}>
       <div style={{ padding: '20px 40px' }}>
@@ -55,7 +59,7 @@ const DriverList = ({ drivers }) => {
           placeholder="Search by name or driver number"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ marginBottom: 16, backgroundColor: '#2b2b2b', color: '#fff', WebkitTextFillColor: "#aaa" }} // Dark background input
+          style={{ marginBottom: 16 }} 
         />
         <div className="vertical-driver-list">
           {paginatedDrivers.map((driver) => (
@@ -87,7 +91,7 @@ const DriverList = ({ drivers }) => {
         <Button 
           type="primary" 
           onClick={handleAddDriverClick} 
-          style={{ marginBottom: 16, backgroundColor: '#1890ff', borderColor: '#1890ff' }} // Optional styling
+          style={{ marginTop: 16 }} // Optional styling
         >
           Add Driver
         </Button>

@@ -8,7 +8,7 @@ import { Input, Button, Typography, Form, message, ConfigProvider, Row, Col, Sel
 import useTitle from "../../hooks/useTitle";
 
 const NewDriverForm = ({vehicles}) => {
-    useTitle('Add Driver | Atlan Application')
+    useTitle('Add Driver | Good to Go!')
     const [createNewDriver, { isSuccess: driverSuccess, isError: driverError, error: driverErrorMsg }] = useAddNewDriverMutation();
     const [createNewUser, { isSuccess: userSuccess, isError: userError, error: userErrorMsg }] = useAddNewUserMutation();
     const navigate = useNavigate();
@@ -74,9 +74,15 @@ const NewDriverForm = ({vehicles}) => {
     return (
         <ConfigProvider
             theme={{
+                components: {
+                  Input: {
+                    colorBgContainer: 'rgba(100, 100, 100, 0.4)', 
+                    colorText: "#fff", // White text
+                  }
+                },
                 token: {
                     colorText: "#fff",
-                    colorTextBase: "#eee"
+                    colorTextPlaceholder: "#aaa"
                 },
             }}
         >
@@ -96,7 +102,6 @@ const NewDriverForm = ({vehicles}) => {
                     <Input
                         placeholder="Enter Username"
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -108,7 +113,6 @@ const NewDriverForm = ({vehicles}) => {
                     <Input.Password
                         placeholder="Enter Password"
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -120,7 +124,6 @@ const NewDriverForm = ({vehicles}) => {
                     <Input
                         placeholder="Enter Email"
                         onChange={(e) => setEmail(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -132,7 +135,6 @@ const NewDriverForm = ({vehicles}) => {
                     <Input
                         placeholder="Enter Contact Number"
                         onChange={(e) => setContactNumber(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -145,7 +147,6 @@ const NewDriverForm = ({vehicles}) => {
                     <Input
                         placeholder="Enter Driver Number"
                         onChange={(e) => setDriverNum(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -160,7 +161,7 @@ const NewDriverForm = ({vehicles}) => {
                             <Input
                                 placeholder="Enter Latitude"
                                 onChange={(e) => setLat(e.target.value)}  
-                                style={{ backgroundColor: "#222" }}
+    
                             />
                         </Form.Item>
                     </Col>
@@ -173,7 +174,7 @@ const NewDriverForm = ({vehicles}) => {
                             <Input
                                 placeholder="Enter Longitude"
                                 onChange={(e) => setLng(e.target.value)}  
-                                style={{ backgroundColor: "#222" }}
+    
                             />
                         </Form.Item>
                     </Col>
@@ -189,7 +190,6 @@ const NewDriverForm = ({vehicles}) => {
                         placeholder="Select a Vehicle"
                         value={vehicleId}
                         onChange={setVehicleId}
-                        style={{ backgroundColor: "#222" }}
                     >
                         {vehicles?.map(vehicle => (
                             <Select.Option key={vehicle._id} value={vehicle._id}>

@@ -8,7 +8,7 @@ import usePersist from '../../hooks/usePersist'
 import useTitle from '../../hooks/useTitle'
 
 const Login = () => {
-    useTitle('Login | Atlan Application')
+    useTitle('Login | Good to Go!')
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -45,7 +45,7 @@ const Login = () => {
 
     const handleToggle = () => setPersist((prev) => !prev)
 
-    if (isLoading) return <Spin size="large" />
+    if (isLoading) return <Spin tip="Logging in..." />
 
     return (
         <section className="public">
@@ -55,54 +55,56 @@ const Login = () => {
                 },
                 components: {
                     Input: {
-                        colorBgContainer: "#222"
+                        colorBgContainer: "rgba(100, 100, 100, 0.4)"
                     }
                 }
             }}>
                 <Typography.Title level={2}>Login</Typography.Title>
-                <Form
-                    name="login-form"
-                    layout="vertical"
-                    onFinish={handleSubmit}
-                    initialValues={{ persist }}
-                >
-                    <Form.Item
-                        label="Username"
-                        name="username"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+                <main className="public__main">
+                    <Form
+                        name="login-form"
+                        layout="vertical"
+                        onFinish={handleSubmit}
+                        initialValues={{ persist }}
                     >
-                        <Input
+                        <Form.Item
+                            label="Username"
+                            name="username"
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                        >
+                            <Input
+                                style={{ width: '25%' }}
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                autoFocus
+                            />
+                        </Form.Item>
+
+                        <Form.Item
                             style={{ width: '25%' }}
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            autoFocus
-                        />
-                    </Form.Item>
+                            label="Password"
+                            name="password"
+                            rules={[{ required: true, message: 'Please input your password!' }]}
+                        >
+                            <Input.Password
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </Form.Item>
 
-                    <Form.Item
-                        style={{ width: '25%' }}
-                        label="Password"
-                        name="password"
-                        rules={[{ required: true, message: 'Please input your password!' }]}
-                    >
-                        <Input.Password
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </Form.Item>
+                        <Form.Item name="persist" valuePropName="checked">
+                            <Checkbox onChange={handleToggle} checked={persist}>
+                                Trust This Device
+                            </Checkbox>
+                        </Form.Item>
 
-                    <Form.Item name="persist" valuePropName="checked">
-                        <Checkbox onChange={handleToggle} checked={persist}>
-                            Trust This Device
-                        </Checkbox>
-                    </Form.Item>
-
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                            Sign In
-                        </Button>
-                    </Form.Item>
-                </Form>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit">
+                                Sign In
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </main>
                 <Divider style={{ marginBottom: 10 }}/>
                 <footer>
                     <Link to="/">Back to Main</Link>

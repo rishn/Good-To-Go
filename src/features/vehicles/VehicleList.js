@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useTitle from "../../hooks/useTitle";
 
 const VehicleList = ({ vehicles }) => {
-  useTitle('Vehicles | Atlan Application');
+  useTitle('Vehicles | Good to Go!');
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,14 +37,18 @@ const VehicleList = ({ vehicles }) => {
     <ConfigProvider theme={{
       components: {
         Input: {
-          colorBgContainer: '#2b2b2b', // Dark background for input
+          colorBgContainer: '#2d2d2d', 
           colorText: "#fff", // White text
         },
         Card: {
-          colorBgContainer: '#1f1f1f',
+          colorBgContainer: 'rgba(100, 100, 100, 0.4)',
           colorText: '#fff',
-          colorTextHeading: '#fff'
+          colorTextHeading: '#fff', 
+          colorBorder: 'transparent'
         }
+      },
+      token: {
+        colorTextPlaceholder: "#aaa"
       }
     }}>
       <div style={{ padding: '20px 40px' }}>
@@ -55,7 +59,7 @@ const VehicleList = ({ vehicles }) => {
           placeholder="Search by license plate or vehicle type"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ marginBottom: 16, backgroundColor: '#2b2b2b', color: '#fff', WebkitTextFillColor: "#aaa" }} // Dark background input
+          style={{ marginBottom: 16 }} 
         />
         <div className="vertical-vehicle-list">
           {paginatedVehicles.map((vehicle) => (
@@ -86,7 +90,7 @@ const VehicleList = ({ vehicles }) => {
         <Button 
           type="primary" 
           onClick={handleAddVehicleClick} 
-          style={{ marginTop: 16, backgroundColor: '#1890ff', borderColor: '#1890ff' }}
+          style={{ marginTop: 16 }}
         >
           Add Vehicle
         </Button>

@@ -7,7 +7,7 @@ import { Input, Button, Typography, Form, message, ConfigProvider, Row, Col } fr
 import useTitle from "../../hooks/useTitle";
 
 const NewAdminForm = () => {
-    useTitle('Add Admin | Atlan Application')
+    useTitle('Add Admin | Good to Go!')
     const [createNewUser, { isSuccess, isError, error }] = useAddNewUserMutation();
     const navigate = useNavigate();
 
@@ -41,14 +41,17 @@ const NewAdminForm = () => {
     };
 
     return (
-        <ConfigProvider
-            theme={{
-                token: {
-                    colorText: "#fff",
-                    colorTextBase: "#eee"
-                },
-            }}
-        >
+        <ConfigProvider theme={{
+          components: {
+            Input: {
+              colorBgContainer: 'rgba(100, 100, 100, 0.4)', 
+              colorText: "#fff", // White text
+            }
+          },
+          token: {
+            colorTextPlaceholder: "#aaa"
+          }
+        }}>
             <Form
                 layout="vertical"
                 onFinish={onFinish}
@@ -65,7 +68,6 @@ const NewAdminForm = () => {
                     <Input
                         placeholder="Enter Username"
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -77,7 +79,6 @@ const NewAdminForm = () => {
                     <Input.Password
                         placeholder="Enter Password"
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -89,7 +90,6 @@ const NewAdminForm = () => {
                     <Input
                         placeholder="Enter Email"
                         onChange={(e) => setEmail(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 
@@ -101,7 +101,6 @@ const NewAdminForm = () => {
                     <Input
                         placeholder="Enter Contact Number"
                         onChange={(e) => setContactNumber(e.target.value)}
-                        style={{ backgroundColor: "#222" }}
                     />
                 </Form.Item>
 

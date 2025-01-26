@@ -5,6 +5,7 @@ import { ArrowLeftOutlined, BarChartOutlined, HomeOutlined, TeamOutlined, Logout
 import { useSendLogoutMutation } from '../features/auth/authApiSlice';
 import useAuth from '../hooks/useAuth';
 import { Outlet } from 'react-router-dom';
+import Logo from '../img/logo.png'
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -87,45 +88,46 @@ const DashLayout = () => {
             theme={{
                 token: {
                     colorText: "#fff",
-                    colorPrimary: "#0f172a", // Setting the primary color for the theme
-                    colorBgBase: "#000"
+                    colorPrimary: "#375f7b", // Setting the primary color for the theme
+                    colorBgBase: "#2d2d2d"
                 },
             }}
         >
             <Layout style={{ minHeight: '100vh' }}>
                 {/* Header */}
-                <Header style={{ backgroundColor: '#0f172a', padding: '0 20px' }}>
+                <Header style={{ backgroundColor: '#264255', padding: '0 20px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Link to="/atlan" style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold' }}>
-                            Atlan Application
+                        <Link to={pathname.includes('/atlan') ? "/atlan" : pathname} style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold' }}>
+                            <img src={Logo} style={{ width: '10%', marginRight: '2px' }}/> Good to Go!
                         </Link>
-                        <Space>
+                        {pathname.includes('/atlan') && <Space>
                             <Button type="text" shape="circle" icon={<ArrowLeftOutlined />}
                                 onClick={() => { window.history.back(); }}>
                             </Button>
-                            <p style={{ color: '#fff', margin: '0 8px' }}>{username}</p>
                             <p style={{ color: '#fff', margin: '0 8px' }}>{status}</p>
+                            <p style={{ color: '#fff', margin: '0 8px' }}>{username}</p>
                             <Dropdown overlay={profileMenu}>
                                 <Avatar style={{ backgroundColor: '#1890ff' }} icon={username.charAt(0).toUpperCase()} />
                             </Dropdown>
-                        </Space>
+                        </Space>}
                     </div>
                 </Header>
 
                 {/* Main Layout */}
                 <Layout style={{ flexGrow: 1 }}>
                     {/* Sidebar */}
-                    <Sider 
+                    {pathname.includes('/atlan') && <Sider 
                         width={200} 
                         style={{ 
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
+                            backgroundColor: '#101c24'
                         }}>
                         {sidebarMenu}
-                    </Sider>
+                    </Sider>}
 
                     {/* Content Area */}
-                    <Layout style={{ padding: '0 24px 24px', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: 'url("/background2.png")' }}>
+                    <Layout style={{ backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: 'url("/background.png")' }}>
                         <Content
                             style={{
                                 padding: 24,
@@ -141,8 +143,8 @@ const DashLayout = () => {
                 </Layout>
 
                 {/* Footer */}
-                <Footer style={{ textAlign: 'center', backgroundColor: '#0f172a', color: '#fff', width: '100%', position: 'relative', bottom: 0 }}>
-                    Atlan Application 2024
+                <Footer style={{ textAlign: 'center', backgroundColor: '#264255', color: '#fff', width: '100%', position: 'relative', bottom: 0 }}>
+                    Good to Go! by Educify™ 2025
                 </Footer>
             </Layout>
         </ConfigProvider>

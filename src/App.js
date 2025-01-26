@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
+import { Outlet, Routes, Route } from 'react-router-dom';
 import Public from './components/Public';
 import Login from './features/auth/Login';
 import Signup from './features/auth/Signup';
@@ -32,10 +31,9 @@ import { useGetVehiclesQuery } from './features/vehicles/vehiclesApiSlice';
 import { useGetBookingsQuery } from './features/bookings/bookingsApiSlice'; 
 import useAuth from './hooks/useAuth'; // Importing useAuth for determining logged-in user roles
 import { Spin, message } from 'antd';
-import { counter } from '@fortawesome/fontawesome-svg-core';
 
 function App() {
-  useTitle('Atlan Application');
+  useTitle('Good to Go!');
   const { id, isDriver, isAdmin } = useAuth(); // Use useAuth to get logged-in user details
 
   const { data: usersResult, isSuccess: isUsersSuccess, isLoading: isUsersLoading } = useGetUsersQuery(undefined);
@@ -100,7 +98,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<DashLayout />}>
         {/* Public routes */}
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
@@ -111,7 +109,7 @@ function App() {
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
             <Route element={<Prefetch />}>
               {/* Dashboard */}
-              <Route path="atlan" element={<DashLayout />}>
+              <Route path="atlan">
                 <Route index element={<Welcome />} />
 
                 <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>

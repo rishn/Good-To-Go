@@ -5,7 +5,7 @@ import { useAddNewUserMutation } from '../users/usersApiSlice'
 import useTitle from '../../hooks/useTitle'
 
 const Signup = () => {
-    useTitle('Customer Signup | Atlan Application')
+    useTitle('Customer Signup | Good to Go!')
 
     const [addNewUser, { isLoading }] = useAddNewUserMutation()
     const navigate = useNavigate()
@@ -34,59 +34,61 @@ const Signup = () => {
                 },
                 components: {
                     Input: {
-                        colorBgContainer: "#222"
+                        colorBgContainer: "rgba(100, 100, 100, 0.4)"
                     }
                 }
             }}>
                 <Typography.Title level={2}>Customer Signup</Typography.Title>
-                <Form
-                    form={form}
-                    name="signup-form"
-                    layout="vertical"
-                    onFinish={onFinish}
-                >
-                    <Form.Item
-                        style={{ width: '25%' }}
-                        label="Username"
-                        name="username"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
+                <main className="public__main">
+                    <Form
+                        form={form}
+                        name="signup-form"
+                        layout="vertical"
+                        onFinish={onFinish}
                     >
-                        <Input />
-                    </Form.Item>
+                        <Form.Item
+                            style={{ width: '25%' }}
+                            label="Username"
+                            name="username"
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                    <Form.Item
-                        style={{ width: '25%' }}
-                        label="Password"
-                        name="password"
-                        rules={[{ required: true, message: 'Please input your password!' }]}
-                    >
-                        <Input.Password />
-                    </Form.Item>
+                        <Form.Item
+                            style={{ width: '25%' }}
+                            label="Password"
+                            name="password"
+                            rules={[{ required: true, message: 'Please input your password!' }]}
+                        >
+                            <Input.Password />
+                        </Form.Item>
 
-                    <Form.Item
-                        style={{ width: '25%' }}
-                        label="Email"
-                        name="email"
-                        rules={[{ required: true, message: 'Please input your email!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
+                        <Form.Item
+                            style={{ width: '25%' }}
+                            label="Email"
+                            name="email"
+                            rules={[{ required: true, message: 'Please input your email!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                    <Form.Item
-                        style={{ width: '25%' }}
-                        label="Contact Number"
-                        name="contactNumber"
-                        rules={[{ required: true, message: 'Please input your contact number!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
+                        <Form.Item
+                            style={{ width: '25%' }}
+                            label="Contact Number"
+                            name="contactNumber"
+                            rules={[{ required: true, message: 'Please input your contact number!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
 
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" loading={isLoading}>
-                            Sign Up
-                        </Button>
-                    </Form.Item>
-                </Form>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" loading={isLoading}>
+                                Sign Up
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </main>
                 <footer>
                     <Link to="/">Back to Main</Link>
                 </footer>

@@ -7,7 +7,7 @@ import { Input, Button, Typography, Form, message, ConfigProvider, Row, Col, Rat
 import useTitle from "../../hooks/useTitle";
 
 const EditAdminForm = ({ admin }) => {
-    useTitle(`Edit ${admin.username} Details | Atlan Application`)
+    useTitle(`Edit ${admin.username} Details | Good to Go!`)
     const [updateAdmin, { isSuccess, isError, error }] = useUpdateUserMutation();
     const [deleteAdmin, { isSuccess: isDelSuccess }] = useDeleteUserMutation();
     
@@ -44,14 +44,17 @@ const EditAdminForm = ({ admin }) => {
     };
 
     return (
-        <ConfigProvider
-            theme={{
-                token: {
-                    colorText: "#fff",
-                    colorTextBase: "#eee"
-                },
-            }}
-        >
+        <ConfigProvider theme={{
+          components: {
+            Input: {
+              colorBgContainer: 'rgba(100, 100, 100, 0.4)', 
+              colorText: "#fff", // White text
+            }
+          },
+          token: {
+            colorTextPlaceholder: "#aaa"
+          }
+        }}>
             <Form
                 layout="vertical"
                 onFinish={onFinish}
@@ -61,15 +64,15 @@ const EditAdminForm = ({ admin }) => {
                 <Typography.Title level={3}>{admin.username}</Typography.Title>
 
                 <Form.Item label="Username" name="username" initialValue={username}>
-                    <Input placeholder="Enter Admin Username" style={{ backgroundColor: "#222" }} />
+                    <Input placeholder="Enter Admin Username" />
                 </Form.Item>
 
                 <Form.Item label="Email" name="email" initialValue={email}>
-                    <Input placeholder="Enter Admin Email" style={{ backgroundColor: "#222" }} />
+                    <Input placeholder="Enter Admin Email" />
                 </Form.Item>
 
                 <Form.Item label="Contact Number" name="contactNumber" initialValue={contactNumber}>
-                    <Input placeholder="Enter Admin Contact Number" style={{ backgroundColor: "#222" }} />
+                    <Input placeholder="Enter Admin Contact Number" />
                 </Form.Item>
 
                 <Form.Item>

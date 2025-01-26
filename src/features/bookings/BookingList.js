@@ -5,7 +5,7 @@ import useTitle from "../../hooks/useTitle";
 import useAuth from '../../hooks/useAuth';
 
 const BookingList = ({ bookings }) => {
-  useTitle('Bookings | Atlan Application');
+  useTitle('Bookings | Good to Go!');
 
   const { isDriver } = useAuth();
 
@@ -42,14 +42,18 @@ const BookingList = ({ bookings }) => {
     <ConfigProvider theme={{
       components: {
         Input: {
-          colorBgContainer: '#2b2b2b', // Dark background for input
+          colorBgContainer: '#2d2d2d', 
           colorText: "#fff", // White text
         },
         Card: {
-          colorBgContainer: '#1f1f1f',
+          colorBgContainer: 'rgba(100, 100, 100, 0.4)',
           colorText: '#fff',
-          colorTextHeading: '#fff'
+          colorTextHeading: '#fff', 
+          colorBorder: 'transparent'
         }
+      },
+      token: {
+        colorTextPlaceholder: "#aaa"
       }
     }}>
       <div style={{ padding: '20px 40px' }}>
@@ -60,7 +64,7 @@ const BookingList = ({ bookings }) => {
           placeholder="Search by item, pickup location, or dropoff location"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ marginBottom: 16, backgroundColor: '#2b2b2b', color: '#fff', WebkitTextFillColor: "#aaa" }} // Dark background input
+          style={{ marginBottom: 16 }} 
         />
         <div className="vertical-booking-list">
           {paginatedBookings.map((booking) => (
@@ -101,7 +105,7 @@ const BookingList = ({ bookings }) => {
         {!isDriver && <Button
           type="primary"
           onClick={handleAddBookingClick}
-          style={{ marginBottom: 16, backgroundColor: '#1890ff', borderColor: '#1890ff' }} // Optional styling
+          style={{ marginTop: 16 }} // Optional styling
         >
           Add Booking
         </Button>}

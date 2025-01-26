@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useTitle from "../../hooks/useTitle";
 
 const AdminList = ({ admins }) => {
-  useTitle('Admins | Atlan Application');
+  useTitle('Admins | Good to Go!');
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,14 +36,18 @@ const AdminList = ({ admins }) => {
     <ConfigProvider theme={{
       components: {
         Input: {
-          colorBgContainer: '#2b2b2b', // Dark background for input
+          colorBgContainer: '#2d2d2d', 
           colorText: "#fff", // White text
         },
         Card: {
-          colorBgContainer: '#1f1f1f',
+          colorBgContainer: 'rgba(100, 100, 100, 0.4)',
           colorText: '#fff',
-          colorTextHeading: '#fff'
+          colorTextHeading: '#fff', 
+          colorBorder: 'transparent'
         }
+      },
+      token: {
+        colorTextPlaceholder: "#aaa"
       }
     }}>
       <div style={{ padding: '20px 40px' }}>
@@ -54,7 +58,7 @@ const AdminList = ({ admins }) => {
           placeholder="Search by name or driver number"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ marginBottom: 16, backgroundColor: '#2b2b2b', color: '#fff', WebkitTextFillColor: "#aaa" }} // Dark background input
+          style={{ marginBottom: 16 }} 
         />
         <div className="vertical-driver-list">
           {paginatedAdmins.map((admin) => (
@@ -86,7 +90,7 @@ const AdminList = ({ admins }) => {
         <Button 
           type="primary" 
           onClick={handleAddAdminClick} 
-          style={{ marginBottom: 16, backgroundColor: '#1890ff', borderColor: '#1890ff' }} // Optional styling
+          style={{ marginTop: 16 }} // Optional styling
         >
           Add Admin
         </Button>

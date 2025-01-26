@@ -26,7 +26,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <ConfigProvider theme={{ components: { Card: { colorBgContainer: '#1f1f1f', colorText: '#fff' } } }}>
+    <ConfigProvider theme={{ components: { Card: { colorBgContainer: '#101c24', colorText: '#fff' } } }}>
       <div style={{ padding: '20px 40px' }}>
         <Typography.Title style={{ color: '#fff' }} level={3}>
           Admin Analytics Dashboard
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
         
         <Row gutter={16}>
           <Col span={12}>
-            <Card style={{ backgroundColor: '#1f1f1f', color: '#fff', textAlign: 'center' }}>
+            <Card style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', color: '#fff', textAlign: 'center', colorBorder: 'transparent' }}>
               <Typography.Title level={4} style={{ color: '#fff' }}>
                 Drivers' Completed Bookings (Pie Chart)
               </Typography.Title>
@@ -62,7 +62,7 @@ const AdminDashboard = () => {
           </Col>
 
           <Col span={12}>
-            <Card style={{ backgroundColor: '#1f1f1f', color: '#fff', textAlign: 'center' }}>
+            <Card style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', color: '#fff', textAlign: 'center', colorBorder: 'transparent' }}>
               <Typography.Title level={4} style={{ color: '#fff' }}>
                 Drivers' Completed Bookings (Bar Chart)
               </Typography.Title>
@@ -73,7 +73,7 @@ const AdminDashboard = () => {
                   <YAxis tick={{ fill: '#fff' }} />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="completedBookings" fill="#8884d8" />
+                  <Bar dataKey="completedBookings" fill="#599ac7" />
                 </BarChart>
               </ResponsiveContainer>
             </Card>

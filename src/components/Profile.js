@@ -12,7 +12,7 @@ import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 const Profile = () => {
   const { id, username, isDriver, isAdmin } = useAuth();
 
-  useTitle(`${username} | Atlan Application`);
+  useTitle(`${username} | Good to Go!`);
 
   const navigate = useNavigate();
 
@@ -77,15 +77,15 @@ const Profile = () => {
   }
 
   return (
-    <ConfigProvider theme={{ token: { colorText: '#fff', colorTextDescription: '#eee' }, 
-        components: { Card: { colorBgContainer: '#1f1f1f'}, Modal: { colorBgContainer: '#333' } } 
+    <ConfigProvider theme={{ token: { colorText: '#fff', colorTextDescription: '#eee', colorBgBase: "#888", colorTextPlaceholder: "#444" }, 
+        components: { Card: { colorBgContainer: 'rgba(100, 100, 100, 0.4)', colorBorder: 'transparent' } } 
     }}>
       <div style={{ padding: '20px 40px' }}>
         <Typography.Title style={{ color: '#fff' }} level={3}>
           Profile
         </Typography.Title>
         {userData && (
-          <Card style={{ backgroundColor: '#1f1f1f', color: '#fff' }}>
+          <Card>
             <div style={{ textAlign: 'center' }}>
               <Avatar size={64} icon={<UserOutlined />} style={{ backgroundColor: '#1890ff' }} />
               <Typography.Title level={4} style={{ color: '#fff', marginTop: 10 }}>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useGetBookingsQuery, useAddNewBookingMutation, useDeleteBookingMutation } from "./bookingsApiSlice";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave, faTrashCan, faLocationArrow } from "@fortawesome/free-solid-svg-icons";
+import { faSave, faTrashCan, faLocationArrow, faMagnifyingGlass, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { Input, Button, Typography, Form, message, ConfigProvider, Modal } from "antd";
 import useTitle from "../../hooks/useTitle";
 import useAuth from '../../hooks/useAuth';
@@ -15,7 +15,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import { geocode } from 'opencage-api-client';
 
 const NewBookingForm = ({ drivers }) => {
-    useTitle('Add Booking | Atlan Application');
+    useTitle('Add Booking | Good to Go!');
     const { id, username } = useAuth();
     const [createNewBooking, { isSuccess: isBookingSuccess, isError: isBookingError, error: bookingError }] = useAddNewBookingMutation();
     const [deleteBooking, { isSuccess: isDelBookingSuccess, isError: isDelBookingError, error: delBookingError }] = useDeleteBookingMutation();
@@ -362,14 +362,14 @@ const NewBookingForm = ({ drivers }) => {
         <ConfigProvider
             theme={{
                 token: {
-                    colorBgBase: "#333",
+                    colorBgContainer: "rgba(100, 100, 100, 0.4)",
                     colorText: "#fff",
-                    colorTextBase: "#eee",
-                    modalColorBg: "#222",
+                    colorTextPlaceholder: "#aaa",
+                    modalColorBg: "rgba(100, 100, 100, 0.4)",
                 },
                 components: {
                     Modal: {
-                        colorBgContainer: "#222",
+                        colorBgContainer: "rgba(100, 100, 100, 0.4)",
                         colorText: "#fff"
                     }
                 }
@@ -420,7 +420,7 @@ const NewBookingForm = ({ drivers }) => {
                 </Form.Item>
 
                 <Button type="primary" onClick={handleMapButton}>
-                    <FontAwesomeIcon icon={faSave} /> Show on Map
+                    <FontAwesomeIcon icon={faLocationDot} /> Show on Map
                 </Button>
 
                 <div id="map" style={{ height: '400px', marginTop: '20px', marginBottom: '20px' }}></div>
@@ -455,7 +455,7 @@ const NewBookingForm = ({ drivers }) => {
                 </Form.Item>
 
                 <Button type="primary" htmlType="submit" style={{ marginRight: 5 }}>
-                    <FontAwesomeIcon icon={faSave} /> Find Driver
+                    <FontAwesomeIcon icon={faMagnifyingGlass} /> Find Driver
                 </Button>
 
                 {newBookings.length > 0 && <Button danger onClick={()=>{handleCancelBooking(newBookings)}}>
